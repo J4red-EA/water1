@@ -15,6 +15,9 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.water1.model.WaterStats
@@ -256,30 +259,37 @@ private fun BarChart(
                 size = Size(barWidth, barHeight)
             )
             
-            // Dibujar etiqueta del día
-            drawContext.canvas.nativeCanvas.apply {
-                drawText(
+            // Dibujar texto usando drawIntoCanvas
+            drawIntoCanvas { canvas ->
+                val nativeCanvas = canvas.nativeCanvas
+                
+                val textPaint = android.graphics.Paint().apply {
+                    color = axisColor.toArgb()
+                    textSize = 28f
+                    textAlign = android.graphics.Paint.Align.CENTER
+                }
+                
+                val valuePaint = android.graphics.Paint().apply {
+                    color = barColor.toArgb()
+                    textSize = 24f
+                    textAlign = android.graphics.Paint.Align.CENTER
+                }
+                
+                // Dibujar etiqueta del día
+                nativeCanvas.drawText(
                     dayData.dayName,
                     x + barWidth / 2,
                     size.height - 30f,
-                    android.graphics.Paint().apply {
-                        color = axisColor.hashCode()
-                        textSize = 28f
-                        textAlign = android.graphics.Paint.Align.CENTER
-                    }
+                    textPaint
                 )
                 
                 // Dibujar valor
                 if (dayData.liters > 0) {
-                    drawText(
+                    nativeCanvas.drawText(
                         "%.0f".format(dayData.liters),
                         x + barWidth / 2,
                         chartHeight - barHeight - 10f,
-                        android.graphics.Paint().apply {
-                            color = barColor.hashCode()
-                            textSize = 24f
-                            textAlign = android.graphics.Paint.Align.CENTER
-                        }
+                        valuePaint
                     )
                 }
             }

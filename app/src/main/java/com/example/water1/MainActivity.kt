@@ -29,7 +29,7 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun WaterApp(viewModel: WaterViewModel = viewModel()) {
-    var currentScreen by remember { mutableStateOf(Screen.Home) }
+    var currentScreen by remember { mutableStateOf<Screen>(Screen.Home) }
     
     val consumptions by viewModel.consumptions.collectAsState()
     val weeklyStats by viewModel.weeklyStats.collectAsState()
@@ -152,8 +152,8 @@ fun WaterApp(viewModel: WaterViewModel = viewModel()) {
 }
 
 sealed class Screen {
-    object Home : Screen()
-    object Stats : Screen()
-    object Tips : Screen()
-    object AddConsumption : Screen()
+    data object Home : Screen()
+    data object Stats : Screen()
+    data object Tips : Screen()
+    data object AddConsumption : Screen()
 }
