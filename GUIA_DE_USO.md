@@ -15,9 +15,11 @@ Esta guía te ayudará a comprender y ejecutar el proyecto "Cuidado Responsable 
 - Muestra una recomendación ecológica personalizada
 
 **Cómo usar:**
-- Toca el botón flotante "+" para agregar un nuevo registro
-- Toca el ícono de configuración (⚙️) para ajustar tu umbral diario
+- Toca el botón flotante **"Registrar"** (con ícono +) en la esquina inferior derecha para agregar un nuevo registro
+- Toca el ícono de configuración (⚙️) en la barra superior para ajustar tu umbral diario
 - Toca el ícono de basura en cada registro para eliminarlo
+
+**Importante**: El botón de registro solo aparece en la pantalla de Inicio
 
 ### 2. Agregar Registro de Consumo
 

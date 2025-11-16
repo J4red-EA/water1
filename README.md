@@ -103,7 +103,42 @@ com.example.water1/
 
 ## 🚀 Cómo Ejecutar el Proyecto
 
-1. **Clonar el repositorio**
+1. **Abrir en Android Studio**
+   - Android Studio Hedgehog o superior
+   - SDK mínimo: API 28 (Android 9.0)
+   - SDK objetivo: API 36
+
+2. **Sincronizar Gradle**
+   ```
+   File → Sync Project with Gradle Files
+   ```
+   El proyecto descargará automáticamente las dependencias
+
+3. **Ejecutar en emulador o dispositivo**
+   - Configurar un emulador con API 28 o superior
+   - O conectar un dispositivo físico con depuración USB habilitada
+   - Presionar el botón ▶️ Run
+
+## 🐛 Solución de Problemas
+
+### El botón "+" no aparece o no funciona
+**Causa**: Scaffold anidado causa conflicto con FAB
+**Solución**: El FAB está ahora en el Scaffold principal del MainActivity
+
+### Error de compilación con "SmallTopAppBar"
+**Solución**: Usar `TopAppBar` en lugar de `SmallTopAppBar` (Material 3)
+
+### Error "nativeCanvas" no encontrado
+**Solución**: Usar `drawIntoCanvas { canvas -> canvas.nativeCanvas }` para acceder al canvas nativo
+
+### Gradle sync failed
+**Solución**:
+```
+Build → Clean Project
+Build → Rebuild Project
+```
+
+1. **Clonar el repositorio (si aplica)**
    ```bash
    git clone [URL_DEL_REPOSITORIO]
    ```

@@ -95,6 +95,11 @@ _showAlert → showAlert (StateFlow)
 - `ConsumptionCard`: Item individual de registro con opción de eliminar
 - `ThresholdDialog`: Popup para configurar umbral
 
+**Arquitectura de UI**:
+- **Sin Scaffold interno**: Se usa Column + TopAppBar directamente
+- **FAB en MainActivity**: El botón flotante está en el Scaffold del MainActivity
+- **Razón**: Evitar conflictos de Scaffolds anidados que ocultaban el FAB
+
 **Estado local vs global**:
 - Estado global: `consumptions`, `todayConsumption` (desde ViewModel)
 - Estado local: `showThresholdDialog`, `showDeleteDialog` (específico de UI)
@@ -285,6 +290,35 @@ fun `stats screen shows empty state correctly`()
 
 ---
 
+## Problemas Comunes Resueltos 🔧
+
+### 1. FAB (Floating Action Button) no visible
+**Problema**: Scaffold anidado dentro de otro Scaffold
+**Solución**: 
+- Mover FAB al Scaffold principal en MainActivity
+- HomeScreen usa Column en lugar de Scaffold
+- FAB solo aparece en pantalla Home
+
+### 2. Error "SmallTopAppBar" no existe
+**Problema**: API no disponible en Material 3
+**Solución**: Usar `TopAppBar` con `@OptIn(ExperimentalMaterial3Api::class)`
+
+### 3. Error "nativeCanvas" en gráficos
+**Problema**: Acceso incorrecto al canvas nativo de Android
+**Solución**: 
+```kotlin
+drawIntoCanvas { canvas ->
+    val nativeCanvas = canvas.nativeCanvas
+    // usar nativeCanvas.drawText(...)
+}
+```
+
+### 4. Type mismatch en sealed class Screen
+**Problema**: Usar `object` en lugar de `data object`
+**Solución**: Cambiar a `data object` (Kotlin 1.9+)
+
+---
+
 ## Buenas Prácticas Aplicadas
 
 1. **Separation of Concerns**: Cada clase tiene una responsabilidad única
@@ -294,6 +328,7 @@ fun `stats screen shows empty state correctly`()
 5. **Immutability**: Uso de `val` y data classes
 6. **Null Safety**: Aprovecha el sistema de tipos de Kotlin
 7. **Resource Management**: Coroutines para operaciones asíncronas
+8. **Avoid Nested Scaffolds**: Un Scaffold por nivel de navegación
 
 ---
 

@@ -111,11 +111,29 @@ Los gráficos se actualizan automáticamente:
 
 ## 🐛 Solución de Problemas Comunes
 
+### ❌ El botón "+" no aparece o no funciona
+**Causa**: Problema de Scaffold anidado (ya corregido)
+**Solución**:
+```
+1. File → Sync Project with Gradle Files
+2. Build → Clean Project
+3. Build → Rebuild Project
+4. Run → Run 'app'
+```
+
 ### ❌ Error: "Cannot resolve symbol..."
 **Solución**:
 ```
 File → Invalidate Caches → Invalidate and Restart
 ```
+
+### ❌ Error: "Unresolved reference 'SmallTopAppBar'"
+**Causa**: API no existe en Material 3
+**Solución**: Ya corregido - se usa `TopAppBar` en su lugar
+
+### ❌ Error: "nativeCanvas" en StatsScreen
+**Causa**: Acceso incorrecto al canvas nativo
+**Solución**: Ya corregido - se usa `drawIntoCanvas` correctamente
 
 ### ❌ Gradle sync failed
 **Solución**:
