@@ -62,6 +62,13 @@ fun WaterApp(viewModel: WaterViewModel = viewModel()) {
                             onClick = { currentScreen = Screen.Tips }
                         )
                     }
+                },
+                floatingActionButton = {
+                    ExtendedFloatingActionButton(
+                        onClick = { currentScreen = Screen.AddConsumption },
+                        icon = { Icon(Icons.Default.Add, contentDescription = "Agregar") },
+                        text = { Text("Registrar") }
+                    )
                 }
             ) { padding ->
                 HomeScreen(
